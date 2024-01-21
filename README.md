@@ -1,4 +1,4 @@
-Parent Repo https://github.com/lscolamiero/pets-frontend
+Parent Repo https://github.com/lscolamiero/PETS-BACKEND
 
 # Getting Started with Create React App
 
