@@ -9,7 +9,6 @@ function Home() {
             const url = `${process.env.REACT_APP_BACKEND_URL}/animals/all`
             const response = await fetch(url)
             const data = await response.json()
-            console.log(data)
             setAnimals(data)
         }
 

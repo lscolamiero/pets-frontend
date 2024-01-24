@@ -1,0 +1,18 @@
+backend:
+- add delete route and controller
+- add update route and controller
+- use appropriate status codes for the update and the delete
+
+frontend
+- add delete button and relevant code to the Animal component
+    - when called it should delete the anmial and navigate back to the home page
+        - bonus add a confirmation (do you want to delete this animal?)
+- add update route and component
+    - the button to update an animal should exist in the Animal component
+    - when that component mounts you should fetch that animal from the database and populate the associated inputs
+- css
+- use a select input for dog or cat
+
+misc:
+- add error handling
+    - to all frontend API calls

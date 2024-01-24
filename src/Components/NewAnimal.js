@@ -5,7 +5,7 @@ function NewAnimal() {
     const INITIAL_STATE = {
         name: '',
         age: '',
-        species: '',
+        species: 'cat',
         description: '',
         profilePicture: ''
     }
@@ -13,6 +13,7 @@ function NewAnimal() {
     const navigate = useNavigate()
 
     const [animal, setAnimal] = useState(INITIAL_STATE)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const handleChange = (e) => {
         setAnimal({
@@ -29,23 +30,33 @@ function NewAnimal() {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                 'content-type': 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(animal)
         })
 
-        if (response.status !== 201) console.log('ERROR:') // add error handling here
-        navigate('/')
+        if (response.status === 201) {
+            if (errorMessage) setErrorMessage('')
+            navigate('/')
+        } else {
+            setErrorMessage('Error creating animal')
+        }
     }
+
+    const errorDisplay = errorMessage && <h3>{errorMessage}</h3>
 
     return (
         <div>
+            {errorDisplay}
             <form onSubmit={handleSubmit}>
-                <input onChange={handleChange} value={animal.name} name='name' placeholder='name'  />
-                <input onChange={handleChange} type='number' value={animal.age} name='age' placeholder='age'  />
-                <input onChange={handleChange} value={animal.species} name='species' placeholder='species'  />
-                <input onChange={handleChange} value={animal.profilePicture} name='profilePicture' placeholder='profile picture'  />
-                <input type="textarea" onChange={handleChange} value={animal.description} name='description' placeholder='description'  />
+                <input onChange={handleChange} value={animal.name} name='name' placeholder='name' />
+                <input onChange={handleChange} type='number' value={animal.age} name='age' placeholder='age' />
+                <select name='species' onChange={handleChange}>
+                    <option value='cat'>cat</option>
+                    <option value='dog'>dog</option>
+                </select>
+                <input onChange={handleChange} value={animal.profilePicture} name='profilePicture' placeholder='profile picture' />
+                <input type="textarea" onChange={handleChange} value={animal.description} name='description' placeholder='description' />
                 <input type="submit" />
             </form>
         </div>
